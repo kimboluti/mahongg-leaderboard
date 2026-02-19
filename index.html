@@ -9,451 +9,144 @@
   :root {
     --red: #c0392b;
     --red-dark: #96281b;
-    --red-light: #e74c3c;
     --red-pale: #fdf2f1;
     --charcoal: #2c2c2c;
-    --dark: #1a1a1a;
     --mid: #555;
     --muted: #888;
     --border: #e0e0e0;
     --bg: #f7f7f7;
     --white: #ffffff;
-    --green-win: #27ae60;
     --green-pale: #eafaf1;
-    --blue-info: #2980b9;
     --blue-pale: #eaf4fb;
+    --blue-info: #2980b9;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--charcoal); min-height: 100vh; font-size: 14px; }
 
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--bg);
-    color: var(--charcoal);
-    min-height: 100vh;
-    font-size: 14px;
-  }
-
-  /* ── TOP BAR ── */
-  .top-bar {
-    background: var(--charcoal);
-    color: rgba(255,255,255,0.7);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    text-align: center;
-    padding: 7px 20px;
-  }
-  .top-bar a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  .top-bar { background: var(--charcoal); color: rgba(255,255,255,0.65); font-size: 11px; letter-spacing: 0.04em; text-align: center; padding: 7px 20px; }
+  .top-bar a { color: rgba(255,255,255,0.65); text-decoration: none; }
   .top-bar a:hover { color: #fff; }
 
-  /* ── HEADER ── */
-  header {
-    background: var(--white);
-    border-bottom: 3px solid var(--red);
-    padding: 0 40px;
-  }
-  .header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 18px 0;
-  }
-  .nlna-logo-block {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-    border-right: 2px solid var(--border);
-    padding-right: 24px;
-    margin-right: 4px;
-  }
-  .nlna-org {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .nlna-name {
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--charcoal);
-    line-height: 1.25;
-  }
+  header { background: var(--white); border-bottom: 3px solid var(--red); padding: 0 40px; }
+  .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: 18px 0; flex-wrap: wrap; }
+  .nlna-logo-block { display: flex; flex-direction: column; line-height: 1.1; border-right: 2px solid var(--border); padding-right: 24px; }
+  .nlna-org { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .nlna-name { font-size: 15px; font-weight: 800; color: var(--charcoal); line-height: 1.25; }
   .nlna-name span { color: var(--red); }
-  .header-divider-text {
-    flex: 1;
-  }
-  .header-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.55rem;
-    font-weight: 600;
-    color: var(--charcoal);
-    line-height: 1.2;
-  }
-  .header-subtitle {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-top: 3px;
-  }
-  .next-session-chip {
-    background: var(--red);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 7px 16px;
-    border-radius: 3px;
-    text-align: center;
-    line-height: 1.4;
-    white-space: nowrap;
-  }
-  .next-session-chip .chip-label { font-weight: 500; opacity: 0.85; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; display: block; }
+  .header-text { flex: 1; }
+  .header-title { font-family: 'Source Serif 4', serif; font-size: 1.55rem; font-weight: 600; color: var(--charcoal); }
+  .header-sub { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 3px; }
+  .session-chip { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 7px 16px; border-radius: 3px; text-align: center; line-height: 1.5; white-space: nowrap; }
+  .chip-label { font-weight: 500; opacity: 0.85; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; display: block; }
 
-  /* ── NAV TABS ── */
-  .tab-bar {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-  }
-  .tab-bar-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    gap: 0;
-  }
-  .tab-btn {
-    padding: 14px 22px;
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    margin-bottom: -1px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
+  .tab-bar { background: var(--white); border-bottom: 1px solid var(--border); }
+  .tab-bar-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; display: flex; }
+  .tab-btn { padding: 14px 22px; background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -1px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.15s; }
   .tab-btn:hover { color: var(--charcoal); }
   .tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
 
-  /* ── MAIN ── */
-  .main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 32px 40px 60px;
-  }
-  @media(max-width:700px) {
-    .main { padding: 20px 16px 40px; }
-    .tab-bar-inner { padding: 0 8px; }
-    .header-inner { padding: 14px 0; gap: 14px; flex-wrap: wrap; }
-    header { padding: 0 16px; }
-  }
-
+  .main { max-width: 1100px; margin: 0 auto; padding: 32px 40px 60px; }
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* ── SECTION HEADING ── */
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--border);
-  }
-  .section-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--charcoal);
-  }
-  .section-meta {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-    margin-left: auto;
-  }
+  .sec-hdr { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
+  .sec-title { font-family: 'Source Serif 4', serif; font-size: 1.35rem; font-weight: 600; color: var(--charcoal); }
+  .sec-meta { font-size: 11px; color: var(--muted); }
 
-  /* ── LEADERBOARD TABLE ── */
-  .lb-wrap {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  table { width: 100%; border-collapse: collapse; }
-  thead th {
-    background: var(--charcoal);
-    color: rgba(255,255,255,0.75);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 11px 14px;
-    text-align: left;
-    cursor: pointer;
-    user-select: none;
-    white-space: nowrap;
-  }
+  .status-box { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 48px 32px; text-align: center; color: var(--muted); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .status-box.error { border-left: 4px solid var(--red); color: #7b1c1c; text-align: left; padding: 24px 28px; }
+  .spinner { display: inline-block; width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--red); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .status-box p { font-size: 13px; line-height: 1.7; margin-top: 6px; }
+
+  .lb-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 4px; overflow-x: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  thead th { background: var(--charcoal); color: rgba(255,255,255,0.75); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 14px; text-align: left; cursor: pointer; user-select: none; white-space: nowrap; }
   thead th:hover { background: #3a3a3a; color: #fff; }
   thead th.sorted { color: #fff; }
   thead th .arr { margin-left: 4px; opacity: 0.5; font-size: 10px; }
   thead th.sorted .arr { opacity: 1; }
-
   tbody tr { border-bottom: 1px solid var(--border); }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover td { background: #fafafa; }
   tbody td { padding: 11px 14px; vertical-align: middle; }
 
-  .rank-num {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 50%;
-    font-weight: 800; font-size: 12px;
-  }
+  .rank-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; font-weight: 800; font-size: 12px; }
   .r1 { background: #f0c040; color: #6b4f00; }
   .r2 { background: #c8c8c8; color: #444; }
   .r3 { background: #cd8a5a; color: #fff; }
   .rn { background: var(--bg); color: var(--muted); font-weight: 600; border: 1px solid var(--border); }
 
-  .player-name {
-    font-weight: 700;
-    font-size: 13.5px;
-    color: var(--charcoal);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .player-name input {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    border: 1px solid var(--red);
-    border-radius: 3px;
-    padding: 3px 8px;
-    color: var(--charcoal);
-    width: 130px;
-  }
-  .player-name input:focus { outline: none; box-shadow: 0 0 0 2px rgba(192,57,43,0.2); }
-  .edit-btn {
-    background: none; border: none; cursor: pointer;
-    color: var(--border); font-size: 12px; padding: 2px 4px;
-    transition: color 0.15s; line-height: 1;
-  }
-  .edit-btn:hover { color: var(--red); }
-
-  .pts-big { font-weight: 800; font-size: 15px; color: var(--charcoal); }
-
-  .pill {
-    display: inline-block; padding: 2px 9px; border-radius: 20px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
-  }
+  .pname { font-weight: 700; font-size: 13.5px; }
+  .pts-big { font-weight: 800; font-size: 15px; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
   .pill-w { background: var(--green-pale); color: #1a7a42; }
   .pill-l { background: #fef0f0; color: #a02020; }
   .pill-wg { background: #f3f3f3; color: #666; }
 
   .rate-wrap { display: flex; align-items: center; gap: 8px; min-width: 110px; }
   .rate-bar { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
-  .rate-fill { height: 100%; background: var(--red); border-radius: 3px; transition: width 0.4s; }
+  .rate-fill { height: 100%; background: var(--red); border-radius: 3px; }
   .rate-pct { font-size: 11px; color: var(--muted); min-width: 30px; }
 
-  /* expand row */
   .xrow { display: none; }
   .xrow td { padding: 0; background: #fafafa; }
-  .xinner {
-    padding: 12px 48px;
-    display: flex; gap: 28px; flex-wrap: wrap;
-    border-top: 1px dashed var(--border);
-    font-size: 12px;
-  }
+  .xinner { padding: 12px 48px; display: flex; gap: 28px; flex-wrap: wrap; border-top: 1px dashed var(--border); }
   .xstat { display: flex; flex-direction: column; gap: 2px; }
   .xstat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
   .xstat-val { font-weight: 700; font-size: 14px; color: var(--charcoal); }
 
-  .hint {
-    font-size: 11px; color: var(--muted); text-align: center;
-    margin-top: 12px; letter-spacing: 0.02em;
-  }
+  .hint { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; }
 
-  /* ── LOG FORM ── */
-  .form-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    max-width: 700px;
-  }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  @media(max-width:560px) { .form-grid { grid-template-columns: 1fr; } }
-  .fg { display: flex; flex-direction: column; gap: 5px; }
-  .fg.full { grid-column: 1 / -1; }
-  .fg label {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--mid);
-  }
-  .fg select, .fg input[type=text], .fg input[type=date] {
-    padding: 9px 11px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    color: var(--charcoal);
-    background: var(--white);
-    transition: border-color 0.15s;
-  }
-  .fg select:focus, .fg input:focus {
-    outline: none; border-color: var(--red);
-    box-shadow: 0 0 0 2px rgba(192,57,43,0.12);
-  }
+  .btn-refresh { background: none; border: 1px solid var(--border); color: var(--mid); padding: 6px 14px; font-size: 11px; font-weight: 600; font-family: 'Montserrat', sans-serif; border-radius: 3px; cursor: pointer; transition: all 0.15s; letter-spacing: 0.04em; margin-left: auto; }
+  .btn-refresh:hover { border-color: var(--red); color: var(--red); }
 
-  .player-checks {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    padding: 10px; background: var(--bg);
-    border: 1px solid var(--border); border-radius: 3px; min-height: 46px;
-  }
-  .player-checks label {
-    display: flex; align-items: center; gap: 5px;
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 3px; padding: 5px 11px;
-    font-size: 12px; font-weight: 600; cursor: pointer;
-    transition: border-color 0.15s;
-    text-transform: none; letter-spacing: 0;
-  }
-  .player-checks label:hover { border-color: var(--red); }
-  .player-checks input[type=checkbox] { accent-color: var(--red); }
-  .player-checks label:has(input:checked) {
-    border-color: var(--red); background: var(--red-pale); color: var(--red-dark);
-  }
-
-  .selected-count {
-    font-size: 11px; color: var(--muted); margin-top: 5px;
-  }
-  .selected-count.ok { color: var(--green-win); font-weight: 600; }
-  .selected-count.over { color: var(--red); font-weight: 600; }
-
-  .btn-submit {
-    background: var(--red);
-    color: #fff;
-    border: none;
-    padding: 12px 32px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: background 0.15s;
-    margin-top: 6px;
-  }
-  .btn-submit:hover { background: var(--red-dark); }
-
-  /* ── HISTORY ── */
-  .hist-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .hist-controls {
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 12px;
-    background: var(--bg);
-  }
+  .hist-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .hist-controls { padding: 12px 20px; border-bottom: 1px solid var(--border); background: var(--bg); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .hist-controls label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mid); }
-  .hist-controls select {
-    padding: 6px 10px; border: 1px solid var(--border); border-radius: 3px;
-    font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--charcoal);
-  }
-  .btn-clear {
-    margin-left: auto; background: none; border: 1px solid var(--border);
-    color: var(--muted); padding: 5px 12px; font-size: 11px; font-weight: 600;
-    border-radius: 3px; cursor: pointer; transition: all 0.15s;
-    font-family: 'Montserrat', sans-serif;
-  }
-  .btn-clear:hover { border-color: var(--red); color: var(--red); }
-
+  .hist-controls select { padding: 6px 10px; border: 1px solid var(--border); border-radius: 3px; font-family: 'Montserrat', sans-serif; font-size: 12px; }
   .hist-list { list-style: none; }
-  .hist-item {
-    display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
-    padding: 12px 20px; border-bottom: 1px solid var(--border);
-    font-size: 12.5px;
-  }
+  .hist-item { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 12px 20px; border-bottom: 1px solid var(--border); font-size: 12.5px; }
   .hist-item:last-child { border-bottom: none; }
   .hist-date { color: var(--muted); min-width: 88px; font-size: 11.5px; }
-  .hist-winner { font-weight: 700; color: var(--charcoal); }
+  .hist-winner { font-weight: 700; }
   .hist-pts { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 12px; }
   .hist-others { color: var(--muted); font-size: 11.5px; flex: 1; }
   .hist-wall { font-style: italic; color: var(--muted); }
   .hist-note { font-style: italic; color: #aaa; font-size: 11px; }
   .no-data { padding: 36px; text-align: center; color: var(--muted); font-style: italic; }
 
-  /* ── GUIDE ── */
-  .guide-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .guide-card p { line-height: 1.75; color: var(--mid); margin-bottom: 14px; font-size: 13.5px; }
-  .guide-card h3 {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.05rem; font-weight: 600;
-    color: var(--charcoal); margin: 20px 0 10px;
-    padding-bottom: 6px; border-bottom: 1px solid var(--border);
-  }
-  .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 10px; }
-  .score-box {
-    border: 1px solid var(--border); border-left: 3px solid var(--red);
-    border-radius: 3px; padding: 10px 12px; background: var(--bg);
-  }
+  .guide-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .guide-card h3 { font-family: 'Source Serif 4', serif; font-size: 1.05rem; font-weight: 600; color: var(--charcoal); margin: 22px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .guide-card h3:first-of-type { margin-top: 0; }
+  .guide-card p { line-height: 1.75; color: var(--mid); margin-bottom: 10px; font-size: 13px; }
+  .callout { border-radius: 0 3px 3px 0; padding: 12px 16px; font-size: 12.5px; line-height: 1.7; margin: 10px 0; }
+  .callout-blue { background: var(--blue-pale); border-left: 4px solid var(--blue-info); color: #1a5276; }
+  .callout-red { background: var(--red-pale); border-left: 4px solid var(--red); color: #7b1c1c; }
+  .callout-mono { font-family: monospace; font-size: 12px; letter-spacing: 0.02em; }
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 10px; margin-bottom: 10px; }
+  .score-box { border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 3px; padding: 10px 12px; background: var(--bg); }
   .score-box.bonus { border-left-color: #e67e22; }
-  .score-box.penalty { border-left-color: #95a5a6; }
   .score-pts { font-weight: 800; font-size: 1.2rem; color: var(--charcoal); }
   .score-desc { font-size: 11.5px; color: var(--mid); margin-top: 3px; }
-  .info-callout {
-    background: var(--blue-pale); border-left: 4px solid var(--blue-info);
-    border-radius: 0 3px 3px 0; padding: 12px 16px;
-    font-size: 12.5px; color: #1a5276; line-height: 1.7; margin-top: 14px;
-  }
+  .step { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+  .step-num { background: var(--red); color: #fff; font-weight: 800; font-size: 12px; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .step-body { font-size: 13px; color: var(--mid); line-height: 1.65; }
+  .step-body strong { color: var(--charcoal); }
+  code { background: #f0f0f0; border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; font-size: 12px; color: var(--charcoal); font-family: monospace; }
 
-  /* ── TOAST ── */
-  #toast {
-    position: fixed; bottom: 28px; left: 50%;
-    transform: translateX(-50%) translateY(16px);
-    background: var(--charcoal); color: #fff;
-    padding: 11px 22px; border-radius: 3px;
-    font-size: 12.5px; font-weight: 600;
-    opacity: 0; pointer-events: none;
-    transition: all 0.25s; z-index: 999;
-    white-space: nowrap;
-    border-left: 3px solid var(--red);
-  }
-  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--charcoal);
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 20px;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    margin-top: 40px;
-  }
+  footer { background: var(--charcoal); color: rgba(255,255,255,0.5); text-align: center; padding: 20px; font-size: 11px; letter-spacing: 0.04em; margin-top: 40px; }
   footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
   footer a:hover { color: #fff; }
+
+  @media(max-width: 700px) {
+    header { padding: 0 16px; }
+    .main { padding: 20px 16px 40px; }
+    .tab-bar-inner { padding: 0 4px; }
+    .tab-btn { padding: 12px 10px; font-size: 10px; }
+    .xinner { padding: 12px 16px; }
+    .guide-card { padding: 20px 18px; }
+  }
 </style>
 </head>
 <body>
@@ -469,11 +162,11 @@
       <span class="nlna-org">NLNA</span>
       <span class="nlna-name">Northern<br><span>Liberties</span></span>
     </div>
-    <div class="header-divider-text">
+    <div class="header-text">
       <div class="header-title">🀄 Mah Jongg Club</div>
-      <div class="header-subtitle">Community Center · 1st &amp; 3rd Wednesdays</div>
+      <div class="header-sub">Community Center · 1st &amp; 3rd Wednesdays</div>
     </div>
-    <div class="next-session-chip" id="session-chip">
+    <div class="session-chip">
       <span class="chip-label">Next Meeting</span>
       <span id="chip-date">—</span>
     </div>
@@ -483,9 +176,9 @@
 <div class="tab-bar">
   <div class="tab-bar-inner">
     <button class="tab-btn active" onclick="switchTab('leaderboard')">🏆 Leaderboard</button>
-    <button class="tab-btn" onclick="switchTab('log')">+ Log Result</button>
-    <button class="tab-btn" onclick="switchTab('history')">History</button>
+    <button class="tab-btn" onclick="switchTab('history')">Game History</button>
     <button class="tab-btn" onclick="switchTab('guide')">Scoring Guide</button>
+    <button class="tab-btn" onclick="switchTab('howto')">How to Update</button>
   </div>
 </div>
 
@@ -493,105 +186,22 @@
 
   <!-- LEADERBOARD -->
   <div class="panel active" id="panel-leaderboard">
-    <div class="section-header">
-      <div class="section-title">Season Standings</div>
-      <div class="section-meta" id="lb-meta"></div>
+    <div class="sec-hdr">
+      <div class="sec-title">Season Standings</div>
+      <div class="sec-meta" id="lb-meta"></div>
+      <button class="btn-refresh" id="refresh-btn" onclick="loadAll()">↻ Refresh</button>
     </div>
-    <div class="lb-wrap">
-      <table id="lb-table">
-        <thead>
-          <tr>
-            <th style="width:40px">#</th>
-            <th onclick="sortBy('name')">Player <span class="arr">↕</span></th>
-            <th onclick="sortBy('points')" class="sorted">Points <span class="arr">↓</span></th>
-            <th onclick="sortBy('wins')">Wins <span class="arr">↕</span></th>
-            <th onclick="sortBy('losses')">Losses <span class="arr">↕</span></th>
-            <th onclick="sortBy('walls')">Walls <span class="arr">↕</span></th>
-            <th onclick="sortBy('games')">Games <span class="arr">↕</span></th>
-            <th>Win Rate</th>
-            <th>Avg/Win</th>
-          </tr>
-        </thead>
-        <tbody id="lb-body"></tbody>
-      </table>
+    <div id="lb-area">
+      <div class="status-box"><div class="spinner"></div><p>Loading standings from Google Sheets…</p></div>
     </div>
-    <p class="hint">Click column headers to sort · Click a row to expand · Click ✏ to rename a player</p>
-  </div>
-
-  <!-- LOG -->
-  <div class="panel" id="panel-log">
-    <div class="section-header">
-      <div class="section-title">Log a Game Result</div>
-    </div>
-    <div class="form-card">
-      <div class="form-grid">
-        <div class="fg">
-          <label>Session Date</label>
-          <input type="date" id="log-date">
-        </div>
-        <div class="fg">
-          <label>Result Type</label>
-          <select id="log-type" onchange="toggleWinner()">
-            <option value="win">🏆 Mah Jongg — someone won</option>
-            <option value="wall">🧱 Wall Game — no winner</option>
-          </select>
-        </div>
-
-        <div class="fg" id="winner-grp">
-          <label>Winner</label>
-          <select id="log-winner"></select>
-        </div>
-        <div class="fg" id="pts-grp">
-          <label>Hand Value</label>
-          <select id="log-points">
-            <option value="25">25 pts — Standard hand</option>
-            <option value="30">30 pts</option>
-            <option value="35">35 pts</option>
-            <option value="40">40 pts</option>
-            <option value="45">45 pts</option>
-            <option value="50">50 pts — Mid-level hand</option>
-            <option value="55">55 pts</option>
-            <option value="60">60 pts</option>
-            <option value="65">65 pts</option>
-            <option value="70">70 pts</option>
-            <option value="75">75 pts — Difficult hand</option>
-            <option value="80">80 pts</option>
-            <option value="85">85 pts — Hardest hands</option>
-          </select>
-        </div>
-        <div class="fg full" id="bonus-grp">
-          <label>Bonus Conditions</label>
-          <select id="log-bonus">
-            <option value="0">None</option>
-            <option value="10">🤲 Self-picked (+10 pts)</option>
-            <option value="20">✨ Jokerless hand (+20 pts)</option>
-            <option value="30">🌟 Self-picked AND Jokerless (+30 pts)</option>
-          </select>
-        </div>
-
-        <div class="fg full">
-          <label>Players at This Table <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);">(select exactly 4)</span></label>
-          <div class="player-checks" id="player-checks"></div>
-          <div class="selected-count" id="sel-count">0 of 4 selected</div>
-        </div>
-
-        <div class="fg full">
-          <label>Notes (optional)</label>
-          <input type="text" id="log-notes" placeholder="e.g. Concealed hand, Flowers section…">
-        </div>
-
-        <div class="fg full">
-          <button class="btn-submit" onclick="logGame()">Log This Game</button>
-        </div>
-      </div>
-    </div>
+    <p class="hint" id="lb-hint" style="display:none">Click column headers to sort · Click a row to expand details</p>
   </div>
 
   <!-- HISTORY -->
   <div class="panel" id="panel-history">
-    <div class="section-header">
-      <div class="section-title">Game History</div>
-      <div class="section-meta" id="hist-meta"></div>
+    <div class="sec-hdr">
+      <div class="sec-title">Game History</div>
+      <div class="sec-meta" id="hist-meta"></div>
     </div>
     <div class="hist-card">
       <div class="hist-controls">
@@ -599,21 +209,18 @@
         <select id="hist-filter" onchange="renderHistory()">
           <option value="">All players</option>
         </select>
-        <button class="btn-clear" onclick="clearAll()">🗑 Clear All Data</button>
       </div>
-      <ul class="hist-list" id="hist-list"></ul>
+      <ul class="hist-list" id="hist-list">
+        <div class="no-data">Loading…</div>
+      </ul>
     </div>
   </div>
 
-  <!-- GUIDE -->
+  <!-- SCORING GUIDE -->
   <div class="panel" id="panel-guide">
-    <div class="section-header">
-      <div class="section-title">American Mah Jongg — Scoring Guide</div>
-    </div>
+    <div class="sec-hdr"><div class="sec-title">Scoring Guide</div></div>
     <div class="guide-card">
-      <p>This club follows <strong>NMJL (National Mah Jongg League)</strong> rules. Each year's card lists valid winning hands, each assigned a point value. The hand must exactly match a hand on the card to declare Mah Jongg.</p>
-
-      <h3>Hand Point Values</h3>
+      <h3>Hand Point Values (NMJL Rules)</h3>
       <div class="score-grid">
         <div class="score-box"><div class="score-pts">25–35</div><div class="score-desc">Standard / easier hands</div></div>
         <div class="score-box"><div class="score-pts">40–60</div><div class="score-desc">Mid-difficulty hands</div></div>
@@ -622,27 +229,78 @@
         <div class="score-box bonus"><div class="score-pts">+10</div><div class="score-desc">Self-picked (won from wall)</div></div>
         <div class="score-box bonus"><div class="score-pts">+20</div><div class="score-desc">Jokerless hand</div></div>
         <div class="score-box bonus"><div class="score-pts">+30</div><div class="score-desc">Self-picked AND Jokerless</div></div>
-        <div class="score-box penalty"><div class="score-pts">−10</div><div class="score-desc">Dead hand penalty</div></div>
       </div>
-
-      <h3>How This Tracker Works</h3>
-      <div class="info-callout">
-        <strong>Winner earns:</strong> hand value + any bonuses. Their total accumulates over the season.<br>
-        <strong>Other 3 players</strong> at the table each receive one loss (no point deduction).<br>
-        <strong>Wall game:</strong> no points, no wins — all 4 players receive a wall game tally.<br>
-        <strong>Absent members</strong> are not counted — only select the 4 who actually played.<br><br>
-        The leaderboard ranks by total points. Sort by any column, or expand a row for individual stats.
+      <h3>How Points Are Tracked</h3>
+      <div class="callout callout-blue">
+        <strong>Winner earns</strong> the hand's point value plus any bonuses — these accumulate over the season.<br>
+        <strong>Other 3 players</strong> each receive a loss (tracked for win-rate, no point deduction).<br>
+        <strong>Wall game:</strong> no points, no wins — all 4 players get a wall-game tally.<br>
+        <strong>Absent members</strong> are not counted — only log the 4 who actually played.
       </div>
-
-      <h3>Club Schedule</h3>
-      <div class="info-callout">
-        Meets on the <strong>1st and 3rd Wednesday of each month</strong> at the NLNA Community Center, 700 N 3rd Street.
-        With 12 members, up to 3 tables of 4 can play simultaneously each session.
+      <h3>Schedule</h3>
+      <div class="callout callout-blue">
+        Meets on the <strong>1st and 3rd Wednesday of each month</strong> at the NLNA Community Center,
+        700 N 3rd Street, Philadelphia PA 19123. With 12 members, up to 3 tables of 4 can play each session.
       </div>
     </div>
   </div>
 
-</div><!-- /main -->
+  <!-- HOW TO UPDATE -->
+  <div class="panel" id="panel-howto">
+    <div class="sec-hdr"><div class="sec-title">How to Update the Leaderboard</div></div>
+    <div class="guide-card">
+
+      <h3>Overview</h3>
+      <p>This page reads live from a Google Sheet. To update standings, just edit the Sheet — everyone sees the new data the next time they load or refresh the page. No coding required.</p>
+
+      <h3>One-Time Setup: Publish the Sheet</h3>
+      <p>The Sheet must be published so the website can read it. You only do this once:</p>
+      <div class="step"><div class="step-num">1</div><div class="step-body">Open your Google Sheet. Go to <strong>File → Share → Publish to web</strong>.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body">In the first dropdown select <strong>Players</strong>, in the second select <strong>Comma-separated values (.csv)</strong>. Click <strong>Publish</strong>. Click OK.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body">Repeat step 2 for the <strong>Games</strong> tab.</div></div>
+      <div class="callout callout-red">
+        ⚠️ The Sheet itself stays private — only you can edit it. Publishing to web only allows the site to <em>read</em> the data.
+      </div>
+
+      <h3>Tab 1 — Players</h3>
+      <p>Create a tab named exactly <code>Players</code>. Row 1 is the header. One member per row:</p>
+      <div class="callout callout-blue callout-mono">
+        <strong>id &nbsp; | name</strong><br>
+        1 &nbsp;&nbsp; | Rachel<br>
+        2 &nbsp;&nbsp; | Louise<br>
+        3 &nbsp;&nbsp; | Jeff<br>
+        4 &nbsp;&nbsp; | Donna<br>
+        5 &nbsp;&nbsp; | Ellie<br>
+        6 &nbsp;&nbsp; | Monica<br>
+        7 &nbsp;&nbsp; | Sasha<br>
+        8 &nbsp;&nbsp; | Sung<br>
+        9 &nbsp;&nbsp; | Lystra<br>
+        10 | Jill<br>
+        11 | Player 1<br>
+        12 | Player 2
+      </div>
+      <p>To rename a member, just change the name in this tab. Their stats will update automatically.</p>
+
+      <h3>Tab 2 — Games</h3>
+      <p>Create a tab named exactly <code>Games</code>. Row 1 is the header. Add one row per game after each session:</p>
+      <div class="callout callout-blue callout-mono">
+        <strong>date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| type | winner_id | points | player1_id | player2_id | player3_id | player4_id | notes</strong><br>
+        2026-03-05 | win &nbsp;| 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 50 &nbsp;&nbsp; | 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Concealed hand<br>
+        2026-03-05 | wall | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 10 &nbsp;&nbsp;&nbsp;&nbsp; |
+      </div>
+      <p style="margin-top:10px;"><strong>type</strong> is <code>win</code> or <code>wall</code>. For wall games, leave <code>winner_id</code> and <code>points</code> blank. Player id numbers come from the Players tab. The winner must be one of the four player columns. The <code>notes</code> column is optional.</p>
+
+      <h3>Logging a Game — Step by Step</h3>
+      <div class="step"><div class="step-num">1</div><div class="step-body">After a session, open your Google Sheet and click the <strong>Games</strong> tab.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body">Add a new row at the bottom for each game played. Fill in the date in <code>YYYY-MM-DD</code> format, the result type, winner's id, point value, and all four player ids.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body">Google Sheets auto-saves. Tell your club members to click <strong>↻ Refresh</strong> on the leaderboard page to see the new standings.</div></div>
+      <div class="callout callout-blue">
+        💡 <strong>Tip:</strong> Keep a printed copy of the id-to-name list handy at games so you can quickly look up numbers when logging.
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <footer>
   NLNA Community Center Mah Jongg Club &nbsp;·&nbsp;
@@ -650,151 +308,191 @@
   &nbsp;·&nbsp; 700 N 3rd Street, Philadelphia PA 19123
 </footer>
 
-<div id="toast"></div>
-
 <script>
-// ─── DATA ─────────────────────────────────────────────────────────────────
-const DEFAULT_NAMES = [
-  'Rachel','Louise','Jeff','Donna','Ellie','Monica',
-  'Sasha','Sung','Lystra','Jill','Player 1','Player 2'
-];
+// ─── CONFIG — your Google Sheet ID ───────────────────────────────────────
+const SHEET_ID    = '1Ymzcy_cDXDAl2Tz9Q1zfT_6DsoF_32g1RB8flTidqtQ';
+const PLAYERS_TAB = 'Players';
+const GAMES_TAB   = 'Games';
 
-function loadData() {
-  try {
-    const raw = localStorage.getItem('nlna_mahjong_v2');
-    if (raw) return JSON.parse(raw);
-  } catch(e) {}
-  return {
-    players: DEFAULT_NAMES.map((name, i) => ({
-      id: i, name,
-      points: 0, wins: 0, losses: 0, walls: 0, games: 0, highHand: 0
-    })),
-    games: []
-  };
+function csvUrl(tab) {
+  return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`;
 }
 
-function save() { localStorage.setItem('nlna_mahjong_v2', JSON.stringify(DATA)); }
+// ─── STATE ────────────────────────────────────────────────────────────────
+let players = [];
+let games   = [];
+let sort    = { key: 'points', dir: -1 };
 
-let DATA = loadData();
-let sort = { key: 'points', dir: -1 };
+// ─── CSV PARSER ───────────────────────────────────────────────────────────
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  return lines.map(line => {
+    const cols = []; let cur = '', inQ = false;
+    for (const c of line) {
+      if (c === '"') { inQ = !inQ; continue; }
+      if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ''; continue; }
+      cur += c;
+    }
+    cols.push(cur.trim());
+    return cols;
+  });
+}
 
-function getP(id) { return DATA.players.find(p => p.id === id); }
+function toObjects(rows) {
+  if (rows.length < 2) return [];
+  const headers = rows[0].map(h => h.toLowerCase().replace(/\s+/g, '_'));
+  return rows.slice(1)
+    .filter(r => r.some(c => c !== ''))
+    .map(r => Object.fromEntries(headers.map((h, i) => [h, r[i] || ''])));
+}
 
-// ─── NEXT SESSION ─────────────────────────────────────────────────────────
-function nextSessions() {
-  const now = new Date();
-  const results = [];
-  for (let m = 0; m < 4; m++) {
-    const base = new Date(now.getFullYear(), now.getMonth() + m, 1);
-    [1, 3].forEach(week => {
-      const dow = base.getDay();
-      const firstWed = 1 + ((3 - dow + 7) % 7);
-      const nth = firstWed + (week - 1) * 7;
-      const daysInMonth = new Date(base.getFullYear(), base.getMonth() + 1, 0).getDate();
-      if (nth <= daysInMonth) {
-        const d = new Date(base.getFullYear(), base.getMonth(), nth);
-        if (d > now) results.push(d);
+// ─── FETCH ────────────────────────────────────────────────────────────────
+async function loadAll() {
+  const btn = document.getElementById('refresh-btn');
+  btn.textContent = '↻ Loading…'; btn.style.pointerEvents = 'none';
+  document.getElementById('lb-area').innerHTML =
+    '<div class="status-box"><div class="spinner"></div><p>Loading from Google Sheets…</p></div>';
+  document.getElementById('lb-hint').style.display = 'none';
+
+  try {
+    const [pText, gText] = await Promise.all([
+      fetch(csvUrl(PLAYERS_TAB), { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(`HTTP ${r.status} loading Players tab`); return r.text(); }),
+      fetch(csvUrl(GAMES_TAB),   { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(`HTTP ${r.status} loading Games tab`);   return r.text(); }),
+    ]);
+
+    // Build player map
+    const pMap = {};
+    toObjects(parseCSV(pText)).forEach(r => {
+      const id = parseInt(r.id);
+      if (!isNaN(id) && r.name)
+        pMap[id] = { id, name: r.name, points: 0, wins: 0, losses: 0, walls: 0, games: 0, highHand: 0 };
+    });
+
+    // Process games
+    games = [];
+    toObjects(parseCSV(gText)).forEach(r => {
+      const type = (r.type || '').toLowerCase().trim();
+      const date = (r.date || '').trim();
+      if (!date || !type) return;
+
+      const pids = [r.player1_id, r.player2_id, r.player3_id, r.player4_id]
+        .map(v => parseInt(v)).filter(v => !isNaN(v) && pMap[v]);
+
+      if (type === 'win') {
+        const wid = parseInt(r.winner_id);
+        const pts = parseInt(r.points) || 0;
+        if (isNaN(wid) || !pMap[wid]) return;
+        pMap[wid].points += pts;
+        pMap[wid].wins++;
+        pMap[wid].games++;
+        if (pts > pMap[wid].highHand) pMap[wid].highHand = pts;
+        pids.forEach(pid => { if (pid !== wid) { pMap[pid].losses++; pMap[pid].games++; } });
+        games.push({ date, type: 'win', winnerId: wid, points: pts, playerIds: pids, notes: r.notes || '' });
+
+      } else if (type === 'wall') {
+        pids.forEach(pid => { pMap[pid].walls++; pMap[pid].games++; });
+        games.push({ date, type: 'wall', playerIds: pids, notes: r.notes || '' });
       }
     });
+
+    players = Object.values(pMap);
+
+    const now = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    document.getElementById('lb-meta').textContent =
+      `${games.length} game${games.length !== 1 ? 's' : ''} · refreshed ${now}`;
+
+    renderLB();
+    populateHistFilter();
+    renderHistory();
+    document.getElementById('lb-hint').style.display = '';
+
+  } catch (err) {
+    document.getElementById('lb-area').innerHTML = `
+      <div class="status-box error">
+        <strong>Could not load data from Google Sheets</strong><br><br>
+        ${err.message}<br><br>
+        Make sure:<br>
+        • Both the <em>Players</em> and <em>Games</em> tabs exist with the correct column headers<br>
+        • The Sheet is published to the web (File → Share → Publish to web) as CSV for each tab<br>
+        • The Sheet ID in the HTML file matches your sheet<br><br>
+        See the <strong>How to Update</strong> tab for full setup instructions.
+      </div>`;
   }
-  return results.sort((a, b) => a - b);
-}
 
-function fmt(d) {
-  return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-function initHeader() {
-  const sessions = nextSessions();
-  const chip = document.getElementById('chip-date');
-  if (sessions.length) {
-    const next = sessions[0];
-    const days = Math.round((next - new Date()) / 86400000);
-    const label = days === 0 ? 'Today!' : days === 1 ? 'Tomorrow' : `in ${days} days`;
-    chip.innerHTML = `${next.toLocaleDateString('en-US',{month:'short',day:'numeric'})} <span style="font-weight:400;opacity:0.8;font-size:10px;">(${label})</span>`;
-  }
-}
-
-// ─── TABS ─────────────────────────────────────────────────────────────────
-const TABS = ['leaderboard','log','history','guide'];
-function switchTab(name) {
-  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', TABS[i] === name));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
-  if (name === 'leaderboard') renderLB();
-  if (name === 'log') initLogForm();
-  if (name === 'history') { renderHistory(); populateHistFilter(); }
+  btn.textContent = '↻ Refresh'; btn.style.pointerEvents = '';
 }
 
 // ─── LEADERBOARD ──────────────────────────────────────────────────────────
 function sortBy(key) {
-  if (sort.key === key) sort.dir *= -1;
-  else { sort.key = key; sort.dir = key === 'name' ? 1 : -1; }
-  // update header styling
-  document.querySelectorAll('#lb-table thead th').forEach(th => {
-    th.classList.remove('sorted');
-    const a = th.querySelector('.arr'); if (a) a.textContent = '↕';
-  });
-  const keyIdx = { name: 1, points: 2, wins: 3, losses: 4, walls: 5, games: 6 };
-  const ths = document.querySelectorAll('#lb-table thead th');
-  if (keyIdx[key] !== undefined) {
-    ths[keyIdx[key]].classList.add('sorted');
-    const a = ths[keyIdx[key]].querySelector('.arr');
-    if (a) a.textContent = sort.dir === 1 ? '↑' : '↓';
-  }
+  sort.key === key ? sort.dir *= -1 : (sort.key = key, sort.dir = key === 'name' ? 1 : -1);
   renderLB();
 }
 
 function renderLB() {
-  const byPts = [...DATA.players].sort((a,b) => b.points - a.points);
-  const sorted = [...DATA.players].sort((a, b) => {
+  if (!players.length) return;
+  const byPts  = [...players].sort((a, b) => b.points - a.points);
+  const sorted = [...players].sort((a, b) => {
     const va = a[sort.key], vb = b[sort.key];
-    if (typeof va === 'string') return sort.dir * va.localeCompare(vb);
-    return sort.dir === -1 ? vb - va : va - vb;
+    return typeof va === 'string' ? sort.dir * va.localeCompare(vb)
+      : sort.dir === -1 ? vb - va : va - vb;
   });
 
-  document.getElementById('lb-meta').textContent =
-    `${DATA.games.length} game${DATA.games.length !== 1 ? 's' : ''} logged this season`;
+  document.getElementById('lb-area').innerHTML = `
+    <div class="lb-wrap"><table id="lb-table">
+      <thead><tr>
+        <th style="width:40px">#</th>
+        <th onclick="sortBy('name')">Player <span class="arr">↕</span></th>
+        <th onclick="sortBy('points')">Points <span class="arr">↕</span></th>
+        <th onclick="sortBy('wins')">Wins <span class="arr">↕</span></th>
+        <th onclick="sortBy('losses')">Losses <span class="arr">↕</span></th>
+        <th onclick="sortBy('walls')">Walls <span class="arr">↕</span></th>
+        <th onclick="sortBy('games')">Games <span class="arr">↕</span></th>
+        <th>Win Rate</th>
+        <th>Avg/Win</th>
+      </tr></thead>
+      <tbody id="lb-body"></tbody>
+    </table></div>`;
+
+  // Apply sort indicator
+  const keyIdx = { name:1, points:2, wins:3, losses:4, walls:5, games:6 };
+  const ths = document.querySelectorAll('#lb-table thead th');
+  if (keyIdx[sort.key] !== undefined) {
+    ths[keyIdx[sort.key]].classList.add('sorted');
+    const a = ths[keyIdx[sort.key]].querySelector('.arr');
+    if (a) a.textContent = sort.dir === 1 ? '↑' : '↓';
+  }
 
   const tbody = document.getElementById('lb-body');
-  tbody.innerHTML = '';
-
-  sorted.forEach(player => {
-    const rank = byPts.findIndex(p => p.id === player.id) + 1;
-    const rankClass = rank <= 3 ? `r${rank}` : 'rn';
-    const wr = player.games > 0 ? (player.wins / player.games * 100) : 0;
-    const avg = player.wins > 0 ? Math.round(player.points / player.wins) : '—';
+  sorted.forEach(p => {
+    const rank = byPts.findIndex(x => x.id === p.id) + 1;
+    const rc   = rank <= 3 ? `r${rank}` : 'rn';
+    const wr   = p.games > 0 ? (p.wins / p.games * 100) : 0;
+    const avg  = p.wins  > 0 ? Math.round(p.points / p.wins) : '—';
+    const lastW = [...games].reverse().find(g => g.type === 'win' && g.winnerId === p.id);
 
     const tr = document.createElement('tr');
     tr.style.cursor = 'pointer';
     tr.innerHTML = `
-      <td><span class="rank-num ${rankClass}">${rank}</span></td>
-      <td><div class="player-name" id="pname-${player.id}">
-        <span class="nm-${player.id}">${player.name}</span>
-        <button class="edit-btn" title="Edit name" onclick="startEdit(event,${player.id})">✏</button>
-      </div></td>
-      <td><span class="pts-big">${player.points}</span></td>
-      <td><span class="pill pill-w">${player.wins}W</span></td>
-      <td><span class="pill pill-l">${player.losses}L</span></td>
-      <td><span class="pill pill-wg">${player.walls}</span></td>
-      <td>${player.games}</td>
+      <td><span class="rank-num ${rc}">${rank}</span></td>
+      <td><span class="pname">${p.name}</span></td>
+      <td><span class="pts-big">${p.points}</span></td>
+      <td><span class="pill pill-w">${p.wins}W</span></td>
+      <td><span class="pill pill-l">${p.losses}L</span></td>
+      <td><span class="pill pill-wg">${p.walls}</span></td>
+      <td>${p.games}</td>
       <td><div class="rate-wrap"><div class="rate-bar"><div class="rate-fill" style="width:${wr}%"></div></div><span class="rate-pct">${wr.toFixed(0)}%</span></div></td>
       <td>${avg}</td>`;
-    tr.addEventListener('click', e => {
-      if (e.target.closest('.edit-btn') || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
-      toggleExpand(player.id);
-    });
+    tr.addEventListener('click', () => toggleExpand(p.id));
     tbody.appendChild(tr);
 
-    const lastWin = [...DATA.games].reverse().find(g => g.winner === player.id);
     const xtr = document.createElement('tr');
-    xtr.className = 'xrow'; xtr.id = `xrow-${player.id}`;
+    xtr.className = 'xrow'; xtr.id = `xrow-${p.id}`;
     xtr.innerHTML = `<td colspan="9"><div class="xinner">
-      <div class="xstat"><span class="xstat-label">Total Points</span><span class="xstat-val">${player.points}</span></div>
-      <div class="xstat"><span class="xstat-label">Best Hand</span><span class="xstat-val">${player.highHand || '—'} pts</span></div>
-      <div class="xstat"><span class="xstat-label">Games Played</span><span class="xstat-val">${player.games}</span></div>
-      <div class="xstat"><span class="xstat-label">Last Win</span><span class="xstat-val">${lastWin ? fmt(lastWin.date) : '—'}</span></div>
-      <div class="xstat"><span class="xstat-label">Wall Game %</span><span class="xstat-val">${player.games > 0 ? (player.walls/player.games*100).toFixed(0) : 0}%</span></div>
+      <div class="xstat"><span class="xstat-label">Total Points</span><span class="xstat-val">${p.points}</span></div>
+      <div class="xstat"><span class="xstat-label">Best Hand</span><span class="xstat-val">${p.highHand || '—'} pts</span></div>
+      <div class="xstat"><span class="xstat-label">Games Played</span><span class="xstat-val">${p.games}</span></div>
+      <div class="xstat"><span class="xstat-label">Last Win</span><span class="xstat-val">${lastW ? fmtDate(lastW.date) : '—'}</span></div>
+      <div class="xstat"><span class="xstat-label">Wall Game %</span><span class="xstat-val">${p.games > 0 ? (p.walls/p.games*100).toFixed(0) : 0}%</span></div>
     </div></td>`;
     tbody.appendChild(xtr);
   });
@@ -802,180 +500,90 @@ function renderLB() {
 
 function toggleExpand(pid) {
   const row = document.getElementById(`xrow-${pid}`);
+  if (!row) return;
   const open = row.style.display === 'table-row';
   document.querySelectorAll('.xrow').forEach(r => r.style.display = 'none');
   if (!open) row.style.display = 'table-row';
 }
 
-function startEdit(e, pid) {
-  e.stopPropagation();
-  const wrap = document.getElementById(`pname-${pid}`);
-  const p = getP(pid);
-  wrap.innerHTML = `
-    <input type="text" value="${p.name}" id="ni-${pid}" style="width:120px"
-      onkeydown="if(event.key==='Enter')saveName(${pid});if(event.key==='Escape')renderLB()">
-    <button class="btn-submit" style="padding:4px 12px;font-size:11px;" onclick="saveName(${pid})">Save</button>`;
-  document.getElementById(`ni-${pid}`).focus();
-}
-
-function saveName(pid) {
-  const inp = document.getElementById(`ni-${pid}`);
-  const val = inp?.value.trim();
-  if (!val) { toast('Name cannot be empty'); return; }
-  getP(pid).name = val;
-  save();
-  renderLB();
-  populateHistFilter();
-  populateLogPlayers();
-  toast(`Renamed to "${val}"`);
-}
-
-// ─── LOG FORM ─────────────────────────────────────────────────────────────
-function initLogForm() {
-  if (!document.getElementById('log-date').value) {
-    document.getElementById('log-date').value = new Date().toISOString().split('T')[0];
-  }
-  populateLogPlayers();
-  toggleWinner();
-}
-
-function populateLogPlayers() {
-  const winSel = document.getElementById('log-winner');
-  winSel.innerHTML = DATA.players.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-
-  const checks = document.getElementById('player-checks');
-  checks.innerHTML = DATA.players.map(p => `
-    <label>
-      <input type="checkbox" value="${p.id}" class="pcheck" onchange="updateSelCount()">
-      ${p.name}
-    </label>`).join('');
-  updateSelCount();
-}
-
-function updateSelCount() {
-  const n = document.querySelectorAll('.pcheck:checked').length;
-  const el = document.getElementById('sel-count');
-  el.textContent = `${n} of 4 selected`;
-  el.className = 'selected-count' + (n === 4 ? ' ok' : n > 4 ? ' over' : '');
-}
-
-function toggleWinner() {
-  const isWin = document.getElementById('log-type').value === 'win';
-  ['winner-grp','pts-grp','bonus-grp'].forEach(id =>
-    document.getElementById(id).style.display = isWin ? '' : 'none');
-}
-
-function checkedPlayers() {
-  return [...document.querySelectorAll('.pcheck:checked')].map(c => parseInt(c.value));
-}
-
-function logGame() {
-  const date = document.getElementById('log-date').value;
-  const type = document.getElementById('log-type').value;
-  const players = checkedPlayers();
-  const notes = document.getElementById('log-notes').value.trim();
-
-  if (!date) { toast('Please select a date'); return; }
-  if (players.length !== 4) { toast('Select exactly 4 players'); return; }
-
-  if (type === 'win') {
-    const wid = parseInt(document.getElementById('log-winner').value);
-    if (!players.includes(wid)) { toast('Winner must be one of the 4 selected players'); return; }
-    const base = parseInt(document.getElementById('log-points').value);
-    const bonus = parseInt(document.getElementById('log-bonus').value) || 0;
-    const total = base + bonus;
-
-    const winner = getP(wid);
-    winner.points += total;
-    winner.wins++;
-    winner.games++;
-    if (total > winner.highHand) winner.highHand = total;
-
-    players.forEach(pid => {
-      if (pid !== wid) { const p = getP(pid); p.losses++; p.games++; }
-    });
-
-    DATA.games.push({ date, type: 'win', winner: wid, players, points: total, base, bonus, notes });
-    save();
-    toast(`🏆 ${winner.name} wins ${total} pts!`);
-
-  } else {
-    players.forEach(pid => { const p = getP(pid); p.walls++; p.games++; });
-    DATA.games.push({ date, type: 'wall', players, notes });
-    save();
-    toast('🧱 Wall game recorded');
-  }
-
-  document.getElementById('log-notes').value = '';
-  document.querySelectorAll('.pcheck').forEach(c => c.checked = false);
-  updateSelCount();
-  renderLB();
-}
-
 // ─── HISTORY ──────────────────────────────────────────────────────────────
+function fmtDate(d) {
+  try { return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }); }
+  catch { return d; }
+}
+function pName(id) { return players.find(p => p.id === id)?.name || `#${id}`; }
+
 function populateHistFilter() {
   const sel = document.getElementById('hist-filter');
   const cur = sel.value;
   sel.innerHTML = '<option value="">All players</option>' +
-    DATA.players.map(p => `<option value="${p.id}"${cur==p.id?' selected':''}>${p.name}</option>`).join('');
+    players.map(p => `<option value="${p.id}"${cur == p.id ? ' selected' : ''}>${p.name}</option>`).join('');
 }
 
 function renderHistory() {
-  const filter = document.getElementById('hist-filter').value;
-  let games = [...DATA.games].reverse();
-  if (filter) games = games.filter(g => g.players?.includes(parseInt(filter)));
-
-  document.getElementById('hist-meta').textContent = `${games.length} result${games.length !== 1 ? 's' : ''}`;
+  const filter   = document.getElementById('hist-filter').value;
+  let filtered   = [...games].reverse();
+  if (filter) filtered = filtered.filter(g => g.playerIds.includes(parseInt(filter)));
+  document.getElementById('hist-meta').textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
 
   const list = document.getElementById('hist-list');
-  if (!games.length) {
-    list.innerHTML = '<div class="no-data">No games logged yet. Use "Log Result" to add your first game.</div>';
-    return;
+  if (!filtered.length) {
+    list.innerHTML = '<div class="no-data">No games found. Data is loaded from the Google Sheet.</div>'; return;
   }
-
-  const bonusLabel = { 10: '🤲 Self-picked', 20: '✨ Jokerless', 30: '🌟 Self+Jokerless' };
-
-  list.innerHTML = games.map(g => {
-    const playerNames = (g.players || []).map(id => getP(id)?.name || '?').join(', ');
+  list.innerHTML = filtered.map(g => {
     if (g.type === 'wall') return `
       <li class="hist-item">
-        <span class="hist-date">${fmt(g.date)}</span>
+        <span class="hist-date">${fmtDate(g.date)}</span>
         <span class="hist-wall">🧱 Wall Game</span>
-        <span class="hist-others">${playerNames}</span>
+        <span class="hist-others">${g.playerIds.map(pName).join(', ')}</span>
         ${g.notes ? `<span class="hist-note">"${g.notes}"</span>` : ''}
       </li>`;
-    const winner = getP(g.winner);
-    const others = (g.players||[]).filter(id=>id!==g.winner).map(id=>getP(id)?.name||'?').join(', ');
+    const others = g.playerIds.filter(id => id !== g.winnerId).map(pName).join(', ');
     return `
       <li class="hist-item">
-        <span class="hist-date">${fmt(g.date)}</span>
-        <span class="hist-winner">${winner?.name||'?'}</span>
+        <span class="hist-date">${fmtDate(g.date)}</span>
+        <span class="hist-winner">${pName(g.winnerId)}</span>
         <span class="hist-pts">${g.points} pts</span>
-        ${g.bonus ? `<span class="pill pill-w" style="font-size:10px">${bonusLabel[g.bonus]||''}</span>` : ''}
         <span class="hist-others">vs ${others}</span>
         ${g.notes ? `<span class="hist-note">"${g.notes}"</span>` : ''}
       </li>`;
   }).join('');
 }
 
-function clearAll() {
-  if (!confirm('Clear ALL game history and reset stats? This cannot be undone.')) return;
-  DATA.games = [];
-  DATA.players.forEach(p => { p.points=0; p.wins=0; p.losses=0; p.walls=0; p.games=0; p.highHand=0; });
-  save(); renderLB(); renderHistory(); toast('All data cleared');
+// ─── TABS ─────────────────────────────────────────────────────────────────
+const TABS = ['leaderboard', 'history', 'guide', 'howto'];
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', TABS[i] === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
 }
 
-// ─── TOAST ────────────────────────────────────────────────────────────────
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2600);
+// ─── NEXT SESSION CHIP ────────────────────────────────────────────────────
+function initHeader() {
+  const now = new Date(), sessions = [];
+  for (let m = 0; m < 4; m++) {
+    const base = new Date(now.getFullYear(), now.getMonth() + m, 1);
+    [1, 3].forEach(week => {
+      const firstWed = 1 + ((3 - base.getDay() + 7) % 7);
+      const nth = firstWed + (week - 1) * 7;
+      if (nth <= new Date(base.getFullYear(), base.getMonth() + 1, 0).getDate()) {
+        const d = new Date(base.getFullYear(), base.getMonth(), nth);
+        if (d > now) sessions.push(d);
+      }
+    });
+  }
+  sessions.sort((a, b) => a - b);
+  if (sessions.length) {
+    const next = sessions[0], days = Math.round((next - now) / 86400000);
+    const label = days === 0 ? 'Today!' : days === 1 ? 'Tomorrow' : `in ${days} days`;
+    document.getElementById('chip-date').innerHTML =
+      `${next.toLocaleDateString('en-US',{month:'short',day:'numeric'})} <span style="font-weight:400;opacity:0.8;font-size:10px;">(${label})</span>`;
+  }
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────
 initHeader();
-renderLB();
-populateHistFilter();
+loadAll();
 </script>
 </body>
 </html>
