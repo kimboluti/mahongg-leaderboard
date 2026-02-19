@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mah Jongg Club — NLNA Community Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c0392b;
+    --red-dark: #96281b;
+    --red-light: #e74c3c;
+    --red-pale: #fdf2f1;
+    --charcoal: #2c2c2c;
+    --dark: #1a1a1a;
+    --mid: #555;
+    --muted: #888;
+    --border: #e0e0e0;
+    --bg: #f7f7f7;
+    --white: #ffffff;
+    --green-win: #27ae60;
+    --green-pale: #eafaf1;
+    --blue-info: #2980b9;
+    --blue-pale: #eaf4fb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--charcoal);
+    min-height: 100vh;
+    font-size: 14px;
+  }
+
+  /* ── TOP BAR ── */
+  .top-bar {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 7px 20px;
+  }
+  .top-bar a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  .top-bar a:hover { color: #fff; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--white);
+    border-bottom: 3px solid var(--red);
+    padding: 0 40px;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 0;
+  }
+  .nlna-logo-block {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    border-right: 2px solid var(--border);
+    padding-right: 24px;
+    margin-right: 4px;
+  }
+  .nlna-org {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .nlna-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--charcoal);
+    line-height: 1.25;
+  }
+  .nlna-name span { color: var(--red); }
+  .header-divider-text {
+    flex: 1;
+  }
+  .header-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.2;
+  }
+  .header-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+  .next-session-chip {
+    background: var(--red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 7px 16px;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .next-session-chip .chip-label { font-weight: 500; opacity: 0.85; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; display: block; }
+
+  /* ── NAV TABS ── */
+  .tab-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+  }
+  .tab-btn {
+    padding: 14px 22px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { color: var(--charcoal); }
+  .tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 40px 60px;
+  }
+  @media(max-width:700px) {
+    .main { padding: 20px 16px 40px; }
+    .tab-bar-inner { padding: 0 8px; }
+    .header-inner { padding: 14px 0; gap: 14px; flex-wrap: wrap; }
+    header { padding: 0 16px; }
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── SECTION HEADING ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+  .section-meta {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-left: auto;
+  }
+
+  /* ── LEADERBOARD TABLE ── */
+  .lb-wrap {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.75);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 11px 14px;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  thead th:hover { background: #3a3a3a; color: #fff; }
+  thead th.sorted { color: #fff; }
+  thead th .arr { margin-left: 4px; opacity: 0.5; font-size: 10px; }
+  thead th.sorted .arr { opacity: 1; }
+
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover td { background: #fafafa; }
+  tbody td { padding: 11px 14px; vertical-align: middle; }
+
+  .rank-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    font-weight: 800; font-size: 12px;
+  }
+  .r1 { background: #f0c040; color: #6b4f00; }
+  .r2 { background: #c8c8c8; color: #444; }
+  .r3 { background: #cd8a5a; color: #fff; }
+  .rn { background: var(--bg); color: var(--muted); font-weight: 600; border: 1px solid var(--border); }
+
+  .player-name {
+    font-weight: 700;
+    font-size: 13.5px;
+    color: var(--charcoal);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .player-name input {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--red);
+    border-radius: 3px;
+    padding: 3px 8px;
+    color: var(--charcoal);
+    width: 130px;
+  }
+  .player-name input:focus { outline: none; box-shadow: 0 0 0 2px rgba(192,57,43,0.2); }
+  .edit-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--border); font-size: 12px; padding: 2px 4px;
+    transition: color 0.15s; line-height: 1;
+  }
+  .edit-btn:hover { color: var(--red); }
+
+  .pts-big { font-weight: 800; font-size: 15px; color: var(--charcoal); }
+
+  .pill {
+    display: inline-block; padding: 2px 9px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+  }
+  .pill-w { background: var(--green-pale); color: #1a7a42; }
+  .pill-l { background: #fef0f0; color: #a02020; }
+  .pill-wg { background: #f3f3f3; color: #666; }
+
+  .rate-wrap { display: flex; align-items: center; gap: 8px; min-width: 110px; }
+  .rate-bar { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .rate-fill { height: 100%; background: var(--red); border-radius: 3px; transition: width 0.4s; }
+  .rate-pct { font-size: 11px; color: var(--muted); min-width: 30px; }
+
+  /* expand row */
+  .xrow { display: none; }
+  .xrow td { padding: 0; background: #fafafa; }
+  .xinner {
+    padding: 12px 48px;
+    display: flex; gap: 28px; flex-wrap: wrap;
+    border-top: 1px dashed var(--border);
+    font-size: 12px;
+  }
+  .xstat { display: flex; flex-direction: column; gap: 2px; }
+  .xstat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .xstat-val { font-weight: 700; font-size: 14px; color: var(--charcoal); }
+
+  .hint {
+    font-size: 11px; color: var(--muted); text-align: center;
+    margin-top: 12px; letter-spacing: 0.02em;
+  }
+
+  /* ── LOG FORM ── */
+  .form-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    max-width: 700px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media(max-width:560px) { .form-grid { grid-template-columns: 1fr; } }
+  .fg { display: flex; flex-direction: column; gap: 5px; }
+  .fg.full { grid-column: 1 / -1; }
+  .fg label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid);
+  }
+  .fg select, .fg input[type=text], .fg input[type=date] {
+    padding: 9px 11px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: var(--charcoal);
+    background: var(--white);
+    transition: border-color 0.15s;
+  }
+  .fg select:focus, .fg input:focus {
+    outline: none; border-color: var(--red);
+    box-shadow: 0 0 0 2px rgba(192,57,43,0.12);
+  }
+
+  .player-checks {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 10px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 3px; min-height: 46px;
+  }
+  .player-checks label {
+    display: flex; align-items: center; gap: 5px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 3px; padding: 5px 11px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    transition: border-color 0.15s;
+    text-transform: none; letter-spacing: 0;
+  }
+  .player-checks label:hover { border-color: var(--red); }
+  .player-checks input[type=checkbox] { accent-color: var(--red); }
+  .player-checks label:has(input:checked) {
+    border-color: var(--red); background: var(--red-pale); color: var(--red-dark);
+  }
+
+  .selected-count {
+    font-size: 11px; color: var(--muted); margin-top: 5px;
+  }
+  .selected-count.ok { color: var(--green-win); font-weight: 600; }
+  .selected-count.over { color: var(--red); font-weight: 600; }
+
+  .btn-submit {
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background 0.15s;
+    margin-top: 6px;
+  }
+  .btn-submit:hover { background: var(--red-dark); }
+
+  /* ── HISTORY ── */
+  .hist-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .hist-controls {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    background: var(--bg);
+  }
+  .hist-controls label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mid); }
+  .hist-controls select {
+    padding: 6px 10px; border: 1px solid var(--border); border-radius: 3px;
+    font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--charcoal);
+  }
+  .btn-clear {
+    margin-left: auto; background: none; border: 1px solid var(--border);
+    color: var(--muted); padding: 5px 12px; font-size: 11px; font-weight: 600;
+    border-radius: 3px; cursor: pointer; transition: all 0.15s;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .btn-clear:hover { border-color: var(--red); color: var(--red); }
+
+  .hist-list { list-style: none; }
+  .hist-item {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+    padding: 12px 20px; border-bottom: 1px solid var(--border);
+    font-size: 12.5px;
+  }
+  .hist-item:last-child { border-bottom: none; }
+  .hist-date { color: var(--muted); min-width: 88px; font-size: 11.5px; }
+  .hist-winner { font-weight: 700; color: var(--charcoal); }
+  .hist-pts { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 12px; }
+  .hist-others { color: var(--muted); font-size: 11.5px; flex: 1; }
+  .hist-wall { font-style: italic; color: var(--muted); }
+  .hist-note { font-style: italic; color: #aaa; font-size: 11px; }
+  .no-data { padding: 36px; text-align: center; color: var(--muted); font-style: italic; }
+
+  /* ── GUIDE ── */
+  .guide-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .guide-card p { line-height: 1.75; color: var(--mid); margin-bottom: 14px; font-size: 13.5px; }
+  .guide-card h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--charcoal); margin: 20px 0 10px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  }
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 10px; }
+  .score-box {
+    border: 1px solid var(--border); border-left: 3px solid var(--red);
+    border-radius: 3px; padding: 10px 12px; background: var(--bg);
+  }
+  .score-box.bonus { border-left-color: #e67e22; }
+  .score-box.penalty { border-left-color: #95a5a6; }
+  .score-pts { font-weight: 800; font-size: 1.2rem; color: var(--charcoal); }
+  .score-desc { font-size: 11.5px; color: var(--mid); margin-top: 3px; }
+  .info-callout {
+    background: var(--blue-pale); border-left: 4px solid var(--blue-info);
+    border-radius: 0 3px 3px 0; padding: 12px 16px;
+    font-size: 12.5px; color: #1a5276; line-height: 1.7; margin-top: 14px;
+  }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed; bottom: 28px; left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: var(--charcoal); color: #fff;
+    padding: 11px 22px; border-radius: 3px;
+    font-size: 12.5px; font-weight: 600;
+    opacity: 0; pointer-events: none;
+    transition: all 0.25s; z-index: 999;
+    white-space: nowrap;
+    border-left: 3px solid var(--red);
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    margin-top: 40px;
+  }
+  footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  footer a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  Northern Liberties Neighbors Association · 700 N 3rd Street, Philadelphia PA 19123 ·
+  <a href="https://www.nlna.org" target="_blank">nlna.org</a>
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="nlna-logo-block">
+      <span class="nlna-org">NLNA</span>
+      <span class="nlna-name">Northern<br><span>Liberties</span></span>
+    </div>
+    <div class="header-divider-text">
+      <div class="header-title">🀄 Mah Jongg Club</div>
+      <div class="header-subtitle">Community Center · 1st &amp; 3rd Wednesdays</div>
+    </div>
+    <div class="next-session-chip" id="session-chip">
+      <span class="chip-label">Next Meeting</span>
+      <span id="chip-date">—</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" onclick="switchTab('leaderboard')">🏆 Leaderboard</button>
+    <button class="tab-btn" onclick="switchTab('log')">+ Log Result</button>
+    <button class="tab-btn" onclick="switchTab('history')">History</button>
+    <button class="tab-btn" onclick="switchTab('guide')">Scoring Guide</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- LEADERBOARD -->
+  <div class="panel active" id="panel-leaderboard">
+    <div class="section-header">
+      <div class="section-title">Season Standings</div>
+      <div class="section-meta" id="lb-meta"></div>
+    </div>
+    <div class="lb-wrap">
+      <table id="lb-table">
+        <thead>
+          <tr>
+            <th style="width:40px">#</th>
+            <th onclick="sortBy('name')">Player <span class="arr">↕</span></th>
+            <th onclick="sortBy('points')" class="sorted">Points <span class="arr">↓</span></th>
+            <th onclick="sortBy('wins')">Wins <span class="arr">↕</span></th>
+            <th onclick="sortBy('losses')">Losses <span class="arr">↕</span></th>
+            <th onclick="sortBy('walls')">Walls <span class="arr">↕</span></th>
+            <th onclick="sortBy('games')">Games <span class="arr">↕</span></th>
+            <th>Win Rate</th>
+            <th>Avg/Win</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body"></tbody>
+      </table>
+    </div>
+    <p class="hint">Click column headers to sort · Click a row to expand · Click ✏ to rename a player</p>
+  </div>
+
+  <!-- LOG -->
+  <div class="panel" id="panel-log">
+    <div class="section-header">
+      <div class="section-title">Log a Game Result</div>
+    </div>
+    <div class="form-card">
+      <div class="form-grid">
+        <div class="fg">
+          <label>Session Date</label>
+          <input type="date" id="log-date">
+        </div>
+        <div class="fg">
+          <label>Result Type</label>
+          <select id="log-type" onchange="toggleWinner()">
+            <option value="win">🏆 Mah Jongg — someone won</option>
+            <option value="wall">🧱 Wall Game — no winner</option>
+          </select>
+        </div>
+
+        <div class="fg" id="winner-grp">
+          <label>Winner</label>
+          <select id="log-winner"></select>
+        </div>
+        <div class="fg" id="pts-grp">
+          <label>Hand Value</label>
+          <select id="log-points">
+            <option value="25">25 pts — Standard hand</option>
+            <option value="30">30 pts</option>
+            <option value="35">35 pts</option>
+            <option value="40">40 pts</option>
+            <option value="45">45 pts</option>
+            <option value="50">50 pts — Mid-level hand</option>
+            <option value="55">55 pts</option>
+            <option value="60">60 pts</option>
+            <option value="65">65 pts</option>
+            <option value="70">70 pts</option>
+            <option value="75">75 pts — Difficult hand</option>
+            <option value="80">80 pts</option>
+            <option value="85">85 pts — Hardest hands</option>
+          </select>
+        </div>
+        <div class="fg full" id="bonus-grp">
+          <label>Bonus Conditions</label>
+          <select id="log-bonus">
+            <option value="0">None</option>
+            <option value="10">🤲 Self-picked (+10 pts)</option>
+            <option value="20">✨ Jokerless hand (+20 pts)</option>
+            <option value="30">🌟 Self-picked AND Jokerless (+30 pts)</option>
+          </select>
+        </div>
+
+        <div class="fg full">
+          <label>Players at This Table <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);">(select exactly 4)</span></label>
+          <div class="player-checks" id="player-checks"></div>
+          <div class="selected-count" id="sel-count">0 of 4 selected</div>
+        </div>
+
+        <div class="fg full">
+          <label>Notes (optional)</label>
+          <input type="text" id="log-notes" placeholder="e.g. Concealed hand, Flowers section…">
+        </div>
+
+        <div class="fg full">
+          <button class="btn-submit" onclick="logGame()">Log This Game</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="panel" id="panel-history">
+    <div class="section-header">
+      <div class="section-title">Game History</div>
+      <div class="section-meta" id="hist-meta"></div>
+    </div>
+    <div class="hist-card">
+      <div class="hist-controls">
+        <label>Filter by player:</label>
+        <select id="hist-filter" onchange="renderHistory()">
+          <option value="">All players</option>
+        </select>
+        <button class="btn-clear" onclick="clearAll()">🗑 Clear All Data</button>
+      </div>
+      <ul class="hist-list" id="hist-list"></ul>
+    </div>
+  </div>
+
+  <!-- GUIDE -->
+  <div class="panel" id="panel-guide">
+    <div class="section-header">
+      <div class="section-title">American Mah Jongg — Scoring Guide</div>
+    </div>
+    <div class="guide-card">
+      <p>This club follows <strong>NMJL (National Mah Jongg League)</strong> rules. Each year's card lists valid winning hands, each assigned a point value. The hand must exactly match a hand on the card to declare Mah Jongg.</p>
+
+      <h3>Hand Point Values</h3>
+      <div class="score-grid">
+        <div class="score-box"><div class="score-pts">25–35</div><div class="score-desc">Standard / easier hands</div></div>
+        <div class="score-box"><div class="score-pts">40–60</div><div class="score-desc">Mid-difficulty hands</div></div>
+        <div class="score-box"><div class="score-pts">65–75</div><div class="score-desc">Difficult hands</div></div>
+        <div class="score-box"><div class="score-pts">80–85</div><div class="score-desc">Hardest / rarest hands</div></div>
+        <div class="score-box bonus"><div class="score-pts">+10</div><div class="score-desc">Self-picked (won from wall)</div></div>
+        <div class="score-box bonus"><div class="score-pts">+20</div><div class="score-desc">Jokerless hand</div></div>
+        <div class="score-box bonus"><div class="score-pts">+30</div><div class="score-desc">Self-picked AND Jokerless</div></div>
+        <div class="score-box penalty"><div class="score-pts">−10</div><div class="score-desc">Dead hand penalty</div></div>
+      </div>
+
+      <h3>How This Tracker Works</h3>
+      <div class="info-callout">
+        <strong>Winner earns:</strong> hand value + any bonuses. Their total accumulates over the season.<br>
+        <strong>Other 3 players</strong> at the table each receive one loss (no point deduction).<br>
+        <strong>Wall game:</strong> no points, no wins — all 4 players receive a wall game tally.<br>
+        <strong>Absent members</strong> are not counted — only select the 4 who actually played.<br><br>
+        The leaderboard ranks by total points. Sort by any column, or expand a row for individual stats.
+      </div>
+
+      <h3>Club Schedule</h3>
+      <div class="info-callout">
+        Meets on the <strong>1st and 3rd Wednesday of each month</strong> at the NLNA Community Center, 700 N 3rd Street.
+        With 12 members, up to 3 tables of 4 can play simultaneously each session.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  NLNA Community Center Mah Jongg Club &nbsp;·&nbsp;
+  <a href="https://www.nlna.org/community-center" target="_blank">nlna.org/community-center</a>
+  &nbsp;·&nbsp; 700 N 3rd Street, Philadelphia PA 19123
+</footer>
+
+<div id="toast"></div>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────────────────
+const DEFAULT_NAMES = [
+  'Rachel','Louise','Jeff','Donna','Ellie','Monica',
+  'Sasha','Sung','Lystra','Jill','Player 1','Player 2'
+];
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem('nlna_mahjong_v2');
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return {
+    players: DEFAULT_NAMES.map((name, i) => ({
+      id: i, name,
+      points: 0, wins: 0, losses: 0, walls: 0, games: 0, highHand: 0
+    })),
+    games: []
+  };
+}
+
+function save() { localStorage.setItem('nlna_mahjong_v2', JSON.stringify(DATA)); }
+
+let DATA = loadData();
+let sort = { key: 'points', dir: -1 };
+
+function getP(id) { return DATA.players.find(p => p.id === id); }
+
+// ─── NEXT SESSION ─────────────────────────────────────────────────────────
+function nextSessions() {
+  const now = new Date();
+  const results = [];
+  for (let m = 0; m < 4; m++) {
+    const base = new Date(now.getFullYear(), now.getMonth() + m, 1);
+    [1, 3].forEach(week => {
+      const dow = base.getDay();
+      const firstWed = 1 + ((3 - dow + 7) % 7);
+      const nth = firstWed + (week - 1) * 7;
+      const daysInMonth = new Date(base.getFullYear(), base.getMonth() + 1, 0).getDate();
+      if (nth <= daysInMonth) {
+        const d = new Date(base.getFullYear(), base.getMonth(), nth);
+        if (d > now) results.push(d);
+      }
+    });
+  }
+  return results.sort((a, b) => a - b);
+}
+
+function fmt(d) {
+  return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function initHeader() {
+  const sessions = nextSessions();
+  const chip = document.getElementById('chip-date');
+  if (sessions.length) {
+    const next = sessions[0];
+    const days = Math.round((next - new Date()) / 86400000);
+    const label = days === 0 ? 'Today!' : days === 1 ? 'Tomorrow' : `in ${days} days`;
+    chip.innerHTML = `${next.toLocaleDateString('en-US',{month:'short',day:'numeric'})} <span style="font-weight:400;opacity:0.8;font-size:10px;">(${label})</span>`;
+  }
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────
+const TABS = ['leaderboard','log','history','guide'];
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', TABS[i] === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  if (name === 'leaderboard') renderLB();
+  if (name === 'log') initLogForm();
+  if (name === 'history') { renderHistory(); populateHistFilter(); }
+}
+
+// ─── LEADERBOARD ──────────────────────────────────────────────────────────
+function sortBy(key) {
+  if (sort.key === key) sort.dir *= -1;
+  else { sort.key = key; sort.dir = key === 'name' ? 1 : -1; }
+  // update header styling
+  document.querySelectorAll('#lb-table thead th').forEach(th => {
+    th.classList.remove('sorted');
+    const a = th.querySelector('.arr'); if (a) a.textContent = '↕';
+  });
+  const keyIdx = { name: 1, points: 2, wins: 3, losses: 4, walls: 5, games: 6 };
+  const ths = document.querySelectorAll('#lb-table thead th');
+  if (keyIdx[key] !== undefined) {
+    ths[keyIdx[key]].classList.add('sorted');
+    const a = ths[keyIdx[key]].querySelector('.arr');
+    if (a) a.textContent = sort.dir === 1 ? '↑' : '↓';
+  }
+  renderLB();
+}
+
+function renderLB() {
+  const byPts = [...DATA.players].sort((a,b) => b.points - a.points);
+  const sorted = [...DATA.players].sort((a, b) => {
+    const va = a[sort.key], vb = b[sort.key];
+    if (typeof va === 'string') return sort.dir * va.localeCompare(vb);
+    return sort.dir === -1 ? vb - va : va - vb;
+  });
+
+  document.getElementById('lb-meta').textContent =
+    `${DATA.games.length} game${DATA.games.length !== 1 ? 's' : ''} logged this season`;
+
+  const tbody = document.getElementById('lb-body');
+  tbody.innerHTML = '';
+
+  sorted.forEach(player => {
+    const rank = byPts.findIndex(p => p.id === player.id) + 1;
+    const rankClass = rank <= 3 ? `r${rank}` : 'rn';
+    const wr = player.games > 0 ? (player.wins / player.games * 100) : 0;
+    const avg = player.wins > 0 ? Math.round(player.points / player.wins) : '—';
+
+    const tr = document.createElement('tr');
+    tr.style.cursor = 'pointer';
+    tr.innerHTML = `
+      <td><span class="rank-num ${rankClass}">${rank}</span></td>
+      <td><div class="player-name" id="pname-${player.id}">
+        <span class="nm-${player.id}">${player.name}</span>
+        <button class="edit-btn" title="Edit name" onclick="startEdit(event,${player.id})">✏</button>
+      </div></td>
+      <td><span class="pts-big">${player.points}</span></td>
+      <td><span class="pill pill-w">${player.wins}W</span></td>
+      <td><span class="pill pill-l">${player.losses}L</span></td>
+      <td><span class="pill pill-wg">${player.walls}</span></td>
+      <td>${player.games}</td>
+      <td><div class="rate-wrap"><div class="rate-bar"><div class="rate-fill" style="width:${wr}%"></div></div><span class="rate-pct">${wr.toFixed(0)}%</span></div></td>
+      <td>${avg}</td>`;
+    tr.addEventListener('click', e => {
+      if (e.target.closest('.edit-btn') || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+      toggleExpand(player.id);
+    });
+    tbody.appendChild(tr);
+
+    const lastWin = [...DATA.games].reverse().find(g => g.winner === player.id);
+    const xtr = document.createElement('tr');
+    xtr.className = 'xrow'; xtr.id = `xrow-${player.id}`;
+    xtr.innerHTML = `<td colspan="9"><div class="xinner">
+      <div class="xstat"><span class="xstat-label">Total Points</span><span class="xstat-val">${player.points}</span></div>
+      <div class="xstat"><span class="xstat-label">Best Hand</span><span class="xstat-val">${player.highHand || '—'} pts</span></div>
+      <div class="xstat"><span class="xstat-label">Games Played</span><span class="xstat-val">${player.games}</span></div>
+      <div class="xstat"><span class="xstat-label">Last Win</span><span class="xstat-val">${lastWin ? fmt(lastWin.date) : '—'}</span></div>
+      <div class="xstat"><span class="xstat-label">Wall Game %</span><span class="xstat-val">${player.games > 0 ? (player.walls/player.games*100).toFixed(0) : 0}%</span></div>
+    </div></td>`;
+    tbody.appendChild(xtr);
+  });
+}
+
+function toggleExpand(pid) {
+  const row = document.getElementById(`xrow-${pid}`);
+  const open = row.style.display === 'table-row';
+  document.querySelectorAll('.xrow').forEach(r => r.style.display = 'none');
+  if (!open) row.style.display = 'table-row';
+}
+
+function startEdit(e, pid) {
+  e.stopPropagation();
+  const wrap = document.getElementById(`pname-${pid}`);
+  const p = getP(pid);
+  wrap.innerHTML = `
+    <input type="text" value="${p.name}" id="ni-${pid}" style="width:120px"
+      onkeydown="if(event.key==='Enter')saveName(${pid});if(event.key==='Escape')renderLB()">
+    <button class="btn-submit" style="padding:4px 12px;font-size:11px;" onclick="saveName(${pid})">Save</button>`;
+  document.getElementById(`ni-${pid}`).focus();
+}
+
+function saveName(pid) {
+  const inp = document.getElementById(`ni-${pid}`);
+  const val = inp?.value.trim();
+  if (!val) { toast('Name cannot be empty'); return; }
+  getP(pid).name = val;
+  save();
+  renderLB();
+  populateHistFilter();
+  populateLogPlayers();
+  toast(`Renamed to "${val}"`);
+}
+
+// ─── LOG FORM ─────────────────────────────────────────────────────────────
+function initLogForm() {
+  if (!document.getElementById('log-date').value) {
+    document.getElementById('log-date').value = new Date().toISOString().split('T')[0];
+  }
+  populateLogPlayers();
+  toggleWinner();
+}
+
+function populateLogPlayers() {
+  const winSel = document.getElementById('log-winner');
+  winSel.innerHTML = DATA.players.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+
+  const checks = document.getElementById('player-checks');
+  checks.innerHTML = DATA.players.map(p => `
+    <label>
+      <input type="checkbox" value="${p.id}" class="pcheck" onchange="updateSelCount()">
+      ${p.name}
+    </label>`).join('');
+  updateSelCount();
+}
+
+function updateSelCount() {
+  const n = document.querySelectorAll('.pcheck:checked').length;
+  const el = document.getElementById('sel-count');
+  el.textContent = `${n} of 4 selected`;
+  el.className = 'selected-count' + (n === 4 ? ' ok' : n > 4 ? ' over' : '');
+}
+
+function toggleWinner() {
+  const isWin = document.getElementById('log-type').value === 'win';
+  ['winner-grp','pts-grp','bonus-grp'].forEach(id =>
+    document.getElementById(id).style.display = isWin ? '' : 'none');
+}
+
+function checkedPlayers() {
+  return [...document.querySelectorAll('.pcheck:checked')].map(c => parseInt(c.value));
+}
+
+function logGame() {
+  const date = document.getElementById('log-date').value;
+  const type = document.getElementById('log-type').value;
+  const players = checkedPlayers();
+  const notes = document.getElementById('log-notes').value.trim();
+
+  if (!date) { toast('Please select a date'); return; }
+  if (players.length !== 4) { toast('Select exactly 4 players'); return; }
+
+  if (type === 'win') {
+    const wid = parseInt(document.getElementById('log-winner').value);
+    if (!players.includes(wid)) { toast('Winner must be one of the 4 selected players'); return; }
+    const base = parseInt(document.getElementById('log-points').value);
+    const bonus = parseInt(document.getElementById('log-bonus').value) || 0;
+    const total = base + bonus;
+
+    const winner = getP(wid);
+    winner.points += total;
+    winner.wins++;
+    winner.games++;
+    if (total > winner.highHand) winner.highHand = total;
+
+    players.forEach(pid => {
+      if (pid !== wid) { const p = getP(pid); p.losses++; p.games++; }
+    });
+
+    DATA.games.push({ date, type: 'win', winner: wid, players, points: total, base, bonus, notes });
+    save();
+    toast(`🏆 ${winner.name} wins ${total} pts!`);
+
+  } else {
+    players.forEach(pid => { const p = getP(pid); p.walls++; p.games++; });
+    DATA.games.push({ date, type: 'wall', players, notes });
+    save();
+    toast('🧱 Wall game recorded');
+  }
+
+  document.getElementById('log-notes').value = '';
+  document.querySelectorAll('.pcheck').forEach(c => c.checked = false);
+  updateSelCount();
+  renderLB();
+}
+
+// ─── HISTORY ──────────────────────────────────────────────────────────────
+function populateHistFilter() {
+  const sel = document.getElementById('hist-filter');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">All players</option>' +
+    DATA.players.map(p => `<option value="${p.id}"${cur==p.id?' selected':''}>${p.name}</option>`).join('');
+}
+
+function renderHistory() {
+  const filter = document.getElementById('hist-filter').value;
+  let games = [...DATA.games].reverse();
+  if (filter) games = games.filter(g => g.players?.includes(parseInt(filter)));
+
+  document.getElementById('hist-meta').textContent = `${games.length} result${games.length !== 1 ? 's' : ''}`;
+
+  const list = document.getElementById('hist-list');
+  if (!games.length) {
+    list.innerHTML = '<div class="no-data">No games logged yet. Use "Log Result" to add your first game.</div>';
+    return;
+  }
+
+  const bonusLabel = { 10: '🤲 Self-picked', 20: '✨ Jokerless', 30: '🌟 Self+Jokerless' };
+
+  list.innerHTML = games.map(g => {
+    const playerNames = (g.players || []).map(id => getP(id)?.name || '?').join(', ');
+    if (g.type === 'wall') return `
+      <li class="hist-item">
+        <span class="hist-date">${fmt(g.date)}</span>
+        <span class="hist-wall">🧱 Wall Game</span>
+        <span class="hist-others">${playerNames}</span>
+        ${g.notes ? `<span class="hist-note">"${g.notes}"</span>` : ''}
+      </li>`;
+    const winner = getP(g.winner);
+    const others = (g.players||[]).filter(id=>id!==g.winner).map(id=>getP(id)?.name||'?').join(', ');
+    return `
+      <li class="hist-item">
+        <span class="hist-date">${fmt(g.date)}</span>
+        <span class="hist-winner">${winner?.name||'?'}</span>
+        <span class="hist-pts">${g.points} pts</span>
+        ${g.bonus ? `<span class="pill pill-w" style="font-size:10px">${bonusLabel[g.bonus]||''}</span>` : ''}
+        <span class="hist-others">vs ${others}</span>
+        ${g.notes ? `<span class="hist-note">"${g.notes}"</span>` : ''}
+      </li>`;
+  }).join('');
+}
+
+function clearAll() {
+  if (!confirm('Clear ALL game history and reset stats? This cannot be undone.')) return;
+  DATA.games = [];
+  DATA.players.forEach(p => { p.points=0; p.wins=0; p.losses=0; p.walls=0; p.games=0; p.highHand=0; });
+  save(); renderLB(); renderHistory(); toast('All data cleared');
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────
+initHeader();
+renderLB();
+populateHistFilter();
+</script>
+</body>
+</html>
